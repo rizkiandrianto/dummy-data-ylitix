@@ -34,8 +34,8 @@ app.get('/*',function(req,res){
         {"Maret" : 1430},
         {"April" : 9000}
       ];break;
-    case 'performance/video_play':
-      [
+    case '/performance/video_play':
+      response = [
         {"Januari" : 12},
         {"Februari" : 6},
         {"Maret" : 4},
