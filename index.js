@@ -47,7 +47,7 @@ app.get('/*',function(req,res){
   var allowedOrigins = ['http://beta.ylitix.com','http://beta.ylitix.com:6969', 'http://localhost:3000'];
   var origin = req.headers.origin;
   if(allowedOrigins.indexOf(origin) > -1){
-       res.setHeader('Access-Control-Allow-Origin', origin);
+       res.setHeader('Access-Control-Allow-Origin', '*');
   }
   res.json(response)
 });
