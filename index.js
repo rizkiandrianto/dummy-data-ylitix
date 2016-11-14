@@ -4,6 +4,7 @@ var request=require('request');
 var http= require('http');
 var compression=require('compression');
 var bodyParser=require('body-parser');
+var moment=require('moment');
 
 process.env.NODE_ENV = 'production';
 
@@ -18,7 +19,7 @@ app.use(express.static('./'));
 
 app.get('/*',function(req,res){
   var response;
-  console.log()
+  //console.log(moment(req.query.date_from).format('dddd, DD MMMM YYYY'))
   switch (req._parsedOriginalUrl.pathname) {
     case '/performance/read':
        response = [
@@ -41,6 +42,14 @@ app.get('/*',function(req,res){
         {"Maret" : 4},
         {"April" : 9}
       ];break;
+    case '/social/followers':
+      response = {
+        '2016-11-01': 1234,
+        '2016-11-02': 987,
+        '2016-11-03': 3456,
+        '2016-11-04': 678,
+        '2016-11-05': 987
+      };break;
     default :
       response = "Welcome To Rizki API";
   }
