@@ -19,37 +19,84 @@ app.use(express.static('./'));
 
 app.get('/*',function(req,res){
   var response;
+  console.log(req.query);
   //console.log(moment(req.query.date_from).format('dddd, DD MMMM YYYY'))
   switch (req._parsedOriginalUrl.pathname) {
     case '/performance/read':
-       response = [
-          {"Januari" : 12},
-          {"Februari" : 6},
-          {"Maret" : 4},
-          {"April" : 9}
-      ];break;
+       response = {
+        read: {
+          overview: "",
+          detail: [
+            {
+              "2016-01-01": 2345,
+              "2016-01-02": 9876,
+              "2016-01-03": 5432,
+              "2016-01-04": 8765,
+              "2016-01-05": 7654
+            }
+          ]
+        }
+       };
+       if (req.query.compare) {
+         response.read.detail[1] = {
+           "2016-01-01": 3245,
+           "2016-01-02": 8976,
+           "2016-01-03": 4532,
+           "2016-01-04": 7865,
+           "2016-01-05": 6754
+         }
+       }
+       break;
     case '/performance/unique_article':
-      response = [
-        {"Januari" : 2000},
-        {"Februari" : 1670},
-        {"Maret" : 1430},
-        {"April" : 9000}
-      ];break;
-    case '/performance/video_play':
-      response = [
-        {"Januari" : 12},
-        {"Februari" : 6},
-        {"Maret" : 4},
-        {"April" : 9}
-      ];break;
-    case '/social/followers':
       response = {
-        '2016-11-01': 1234,
-        '2016-11-02': 987,
-        '2016-11-03': 3456,
-        '2016-11-04': 678,
-        '2016-11-05': 987
-      };break;
+       unique_article: {
+         overview: "",
+         detail: [
+           {
+             "2016-01-01": 23,
+             "2016-01-02": 98,
+             "2016-01-03": 54,
+             "2016-01-04": 87,
+             "2016-01-05": 76
+           }
+         ]
+       }
+      };
+      if (req.query.compare) {
+        response.unique_article.detail[1] = {
+          "2016-01-01": 32,
+          "2016-01-02": 89,
+          "2016-01-03": 45,
+          "2016-01-04": 78,
+          "2016-01-05": 67
+        }
+      }
+      break;
+    case '/performance/video_play':
+      response = {
+       video_play: {
+         overview: "",
+         detail: [
+           {
+             "2016-01-01": 2345,
+             "2016-01-02": 9876,
+             "2016-01-03": 5432,
+             "2016-01-04": 8765,
+             "2016-01-05": 7654
+           }
+         ]
+       }
+      };
+      if (req.query.compare) {
+        response.video_play.detail[1] = {
+          "2016-01-01": 3245,
+          "2016-01-02": 8976,
+          "2016-01-03": 4532,
+          "2016-01-04": 7865,
+          "2016-01-05": 6754
+        }
+      }
+      break;
     default :
       response = "Welcome To Rizki API";
   }
